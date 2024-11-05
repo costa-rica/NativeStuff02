@@ -23,6 +23,18 @@ export default function HomeScreen({ navigation }) {
       >
         <Text>ExpoDocPicker01</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.touchDoc}
+        onPress={() => navigation.navigate("Camera")}
+      >
+        <Text>Camera Screen</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.touchDoc}
+        onPress={() => navigation.navigate("Gallery")}
+      >
+        <Text>Gallery Screen</Text>
+      </TouchableOpacity>
     </View>
   );
 }
