@@ -55,6 +55,8 @@ export default function CameraScreen({ navigation }) {
 
     try {
       // Ensure the photos directory exists
+      // ---> if folder does not exist it will create it
+      // ---> if it does exist it will do nothing
       await FileSystem.makeDirectoryAsync(
         `${FileSystem.documentDirectory}photos`,
         {
