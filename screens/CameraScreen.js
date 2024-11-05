@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Camera, CameraType, FlashMode } from "expo-camera/legacy";
 import { useDispatch } from "react-redux";
-import { ajouterPhoto } from "../reducers/document";
+import { ajouterPhoto, setPhotoPermenantUri } from "../reducers/document";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useIsFocused } from "@react-navigation/native";
+
+// Move to permenant
+import * as FileSystem from "expo-file-system";
 
 export default function CameraScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -42,7 +45,34 @@ export default function CameraScreen({ navigation }) {
 
     dispatch(ajouterPhoto(uri));
     console.log(`takePicture uri: ${uri}`);
-    navigation.navigate("Gallery");
+
+    // Move photo to a more permanent directory
+    const newUri = `${
+      FileSystem.documentDirectory
+    }photos/photo_${Date.now()}.jpg`;
+    console.log("----- permenant locaiton: ----");
+    console.log(newUri);
+
+    try {
+      // Ensure the photos directory exists
+      await FileSystem.makeDirectoryAsync(
+        `${FileSystem.documentDirectory}photos`,
+        {
+          intermediates: true,
+        }
+      );
+      await FileSystem.moveAsync({
+        from: uri,
+        to: newUri,
+      });
+      console.log(`waited on newURI: ${newUri}`);
+      //setPhotoUri(newUri); // Update the URI to point to the new permanent location
+      dispatch(setPhotoPermenantUri(newUri));
+    } catch (error) {
+      console.error("Error moving photo:", error);
+    }
+
+    // navigation.navigate("Gallery");
     // fetch(`${BACKEND_ADDRESS}/upload`, {
     // 	method: "POST",
     // 	body: formData,
@@ -66,7 +96,7 @@ export default function CameraScreen({ navigation }) {
     >
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Documents")}
+          onPress={() => navigation.navigate("Gallery")}
           style={styles.button}
         >
           <FontAwesome name="arrow-left" size={25} color="#ffffff" />

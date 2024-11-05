@@ -6,6 +6,7 @@ import ExpoDocPicker from "./screens/ExpoDocPicker";
 import ExpoDocPicker01 from "./screens/ExpoDocPicker01";
 import CameraScreen from "./screens/CameraScreen";
 import GalleryScreen from "./screens/GalleryScreen";
+import PhotoListScreen from "./screens/PhotoListScreen";
 
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
@@ -29,6 +30,7 @@ export default function App() {
           <Stack.Screen name="ExpoDocPicker01" component={ExpoDocPicker01} />
           <Stack.Screen name="Camera" component={CameraScreen} />
           <Stack.Screen name="Gallery" component={GalleryScreen} />
+          <Stack.Screen name="PhotoList" component={PhotoListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

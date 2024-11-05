@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export default function ExpoDocPicker01({ navigation }) {
   console.log("- started app");
@@ -28,6 +29,14 @@ export default function ExpoDocPicker01({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={styles.button}
+        >
+          <FontAwesome name="arrow-left" size={25} color="black" />
+        </TouchableOpacity>
+      </View>
       {/* <Button title="Select File" onPress={this._pickDocument} /> */}
       <Button title="Select File" onPress={() => handleSelectFile()} />
       {fileObj && (
@@ -46,6 +55,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
+  },
+  buttonsContainer: {
+    flex: 0.1,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "gray",
+  },
+  button: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    borderRadius: 50,
   },
   fileInfo: {
     marginTop: 20,

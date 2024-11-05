@@ -6,6 +6,7 @@ const initialState = {
     practicien: null,
     notes: null,
     photos: [],
+    photosPermenant: [],
     modalOuvert: false,
   },
 };
@@ -39,6 +40,10 @@ export const documentSlice = createSlice({
     supprimerTousLesPhotos: (state) => {
       state.value.photos = [];
     },
+    setPhotoPermenantUri: (state, action) => {
+      console.log("- permenant locaiton redux !!");
+      state.value.photosPermenant.push(action.payload);
+    },
   },
 });
 
@@ -49,5 +54,6 @@ export const {
   ajouterPhoto,
   supprimerPhoto,
   supprimerTousLesPhotos,
+  setPhotoPermenantUri,
 } = documentSlice.actions;
 export default documentSlice.reducer;

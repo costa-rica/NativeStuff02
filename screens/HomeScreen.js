@@ -35,6 +35,12 @@ export default function HomeScreen({ navigation }) {
       >
         <Text>Gallery Screen</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.touchDoc}
+        onPress={() => navigation.navigate("PhotoList")}
+      >
+        <Text>Photo List Screen</Text>
+      </TouchableOpacity>
     </View>
   );
 }

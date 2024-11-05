@@ -55,3 +55,7 @@ The result looks like:
 `npx expo install expo-document-picker`
 
 - This does not use react-native-document-picker
+
+## Permenant Storage
+
+- See CameraScreen.js
